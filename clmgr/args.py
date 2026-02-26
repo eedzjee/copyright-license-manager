@@ -37,6 +37,12 @@ def parse_args(args):
         default=10,
         metavar="REGION",
     )
+    parser.add_argument(
+        "-n",
+        "--dry-run",
+        help="Dry run. Do not modify files; only show what would change",
+        action="store_true",
+    )
     parser.add_argument("--debug", help="Verbose logging", action="store_true")
     parser.add_argument("--version", help="Show version", action="store_true")
 

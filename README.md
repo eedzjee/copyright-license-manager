@@ -38,6 +38,7 @@ Options:
 -c, --config FILE     Path to the configuration file (default: copyright.yml)
 -d, --dir DIR         Input directory to process (default: current working directory)
 -i, --file FILE       Process a single input file
+-n, --dry-run         Dry run. Do not modify files; only show what would change
 --region REGION       Copyright search region (default: 10)
 --debug               Enable verbose logging
 --version             Show version information

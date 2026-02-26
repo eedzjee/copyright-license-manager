@@ -15,7 +15,7 @@ from clmgr.args import (
     read_config,
 )
 from clmgr.log import setup_custom_logger
-from clmgr.processor import process_lines
+from clmgr.processor import DryRunProcessor, Processor
 from clmgr.template import licenses
 
 
@@ -56,8 +56,12 @@ def main(args=sys.argv[1:]):
         )
     log.debug(f"Configuration: \n{pformat(cfg, indent=2)}")
 
-    # Process Input
-    # Input can be one of the following:
+    processor = Processor(cfg, args)
+    if getattr(args, "dry_run", False):
+        processor = DryRunProcessor(cfg, args)
+
+    # Process input
+    # This can be one of the following:
     #  * file
     #  * directory
     # however please note that the configuration must always be provided either present from
@@ -103,7 +107,7 @@ def main(args=sys.argv[1:]):
             src.close()
 
             # Process file
-            res = process_lines(cfg, file, ext, lines, args)
+            res = processor.process_lines(file, ext, lines)
             add += res[0]
             upd += res[1]
             utd += res[2]
