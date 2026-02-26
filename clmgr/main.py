@@ -58,6 +58,7 @@ def main(args=sys.argv[1:]):
 
     processor = Processor(cfg, args)
     if getattr(args, "dry_run", False):
+        print("Dry run enabled. No files will be updated.")
         processor = DryRunProcessor(cfg, args)
 
     # Process input
@@ -99,7 +100,7 @@ def main(args=sys.argv[1:]):
                     file_list.append(Path(root, file))
 
         for file in file_list:
-            log.info(f"Processing file: {file}")
+            log.debug(f"Processing file: {file}")
 
             # Read source and close it
             src = open(file=file.absolute(), encoding="utf-8", mode="r")

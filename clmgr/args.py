@@ -35,16 +35,26 @@ def parse_args(args):
         "--region",
         help="Copyright search region; default=10",
         default=10,
-        metavar="REGION",
+        metavar="REGION"
     )
     parser.add_argument(
         "-n",
         "--dry-run",
         help="Dry run. Do not modify files; only show what would change",
-        action="store_true",
+        action="store_true"
     )
-    parser.add_argument("--debug", help="Verbose logging", action="store_true")
-    parser.add_argument("--version", help="Show version", action="store_true")
+    parser.add_argument(
+        "--debug",
+        dest="debug",
+        help="Verbose logging",
+        action="store_true"
+    )
+    parser.add_argument(
+        "-v",
+        "--version",
+        help="Show version",
+        action="store_true"
+    )
 
     # Parse Arguments
     return parser.parse_args(args)
@@ -76,7 +86,7 @@ def handle_debug(args, logger):
     args
         Parsed commandline arguments
     """
-    if args.debug:
+    if getattr(args, "debug", False):
         log_level = logging.DEBUG
     else:
         log_level = logging.INFO
